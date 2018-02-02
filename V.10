@@ -1,0 +1,88 @@
++String: Pass Directory
+ +Var Name : (hiddenDirectory/)/DNS
+ +
+ +String: USR Directory
+ +Var Name : (hiddenDirectory/)/UDNS
+ +
+ +String: URL
+ +Var URL : “DNS”
+ +
+ +String: USRname
+ +Var USR : USRname = filename
+ +
+ +String : pass
+ +Var pass : ieat
+ +
+ +
+ +
+ +
+ +
+ +//create directories incrementally
+ +LAST_SOLUTION=$(echo $(ls -d SOLUTION_[[:digit:]][[:digit:]][[:digit:]][[:digit:]] 2> /dev/null) | awk '{ print $(NF) }')
+ +if [ -n "$LAST_SOLUTION" ] ; then
+ +    mkdir SOLUTION_$(printf "%04d\n" $(expr ${LAST_SOLUTION: -4} + 1))
+ +else
+ +    mkdir SOLUTION_0001
+ +fi
+ +
+ +//create file if it doesn’t exist
+ +filename=$1
+ +
+ +# If file doesn't exist, create it
+ +if [[ ! -f $filename ]]; then
+ +    touch $filename
+ +    echo "Created \"$filename\""
+ +    exit 0
+ +fi
+ +
+ +
+ +//rename files incrementally
+ +count=1
+ +for i in *; do
+ +    mv "${i}" file${count}.`echo "${i}" | awk -F. '{print $2}'`
+ +    ((++count))
+ +
+ +done 
+ +
+ +
+ +ssh-keygen -t rsa -b 4096 -C “DNS” -P ieat -f /Volumes/Secure/nk/digit -q 
+ +
+ +ssh-keygen -t rsa -b 4096 -C “DNS” -P USRname -f /Volumes/Secure/nk/Udigit -q 
+ +
+ +
+ +
+ +
+ +
+ +
+ +//digit directory order
+ +
+ +digit=1
+ +while true; do
+ +    temp_name=$filename-$digit
+ +    if [[ ! -f $temp_name ]]; then
+ +        touch $temp_name
+ +        echo "Created \"$temp_name\""
+ +        exit 0
+ +    fi
+ +    digit=$(($digit + 1))
+ +done
+ +
+ +Udigit=1
+ +while true; do
+ +    temp_name=$filename-$Udigit
+ +    if [[ ! -f $temp_name ]]; then
+ +        touch $temp_name
+ +        echo "Created \"$temp_name\""
+ +        exit 0
+ +    fi
+ +    Udigit=$(($Udigit + 1))
+ +done
+ +
+ +
+ +
+ +//Weekly Jitter randomisation
+ +//Set a counter j, initially set it to 1
+ +//Initiate a for loop and use a shell glob *.txt to obtain all txt files.
+ +//for each file rename it using mv and increase the counter by 1.
+ +
+ +j=1;for i in *.txt; do mv "$i" file"$j".txt; let j=j+1;done
