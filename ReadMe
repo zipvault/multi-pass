@@ -1,0 +1,10 @@
+Biometric User Password Generation Management
+
+automatically generates keys for user and password
+
+saves the keys
+
+randomises the keys weekly
+
+only accesibble by biometric storage
+
