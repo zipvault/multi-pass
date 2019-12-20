@@ -1,3 +1,5 @@
+1.1
+
 Biometric User Password Generation Management
 
 automatically generates keys for user and password
@@ -8,3 +10,5 @@ randomises the keys weekly
 
 only accesibble by biometric storage
 
+1.2 
+Assigned for Yubi co bio
